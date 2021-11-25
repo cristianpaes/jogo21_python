@@ -7,6 +7,7 @@ separacao = ('--')*20
 
 
 print(f"{separacao}\n        BEM-VINDO(A) AO JOGO 21!\n{separacao}")
+print(f"{separacao}\nREGRAS: O JOGO TERMINA AO COMPLETAR 21, CHEGAR PROXIMO AO 21 E SE PASSAR DO 21\n{separacao}")
 
 nome_jogador = str(input("\nDigite seu nome:").upper())
 
@@ -14,7 +15,7 @@ opcao = input("\nDIGITE: \n[J] PARA JOGAR\n[S] PARA SAIR\n>> ")
 
 validacao = total = bar = nai = 0
 
-if opcao == "j" or opcao =="j":
+if opcao == "J" or opcao =="j":
     print("\nCOMEÇANDO...")
 elif opcao == "S" or opcao =="s":
     print(f'\nSAINDO...\n{nome_jogador} até a Proxíma!')
@@ -42,7 +43,7 @@ while validacao != "N":
     if total > 21:
           print(f'\n{nome_jogador} Você PERDEU!\nAs soma das cartas escolhidas foi {total} e PASSOU de 21!')
           break
-    elif total > 15  and total < 21:
+    elif total >=16  and total < 21:
           print(f'\nParabéns! {nome_jogador} Você chegou próximo ao 21.\nA soma das cartas escolhidas foi {total} e Não PASSOU de 21!')
           break
     elif total == 21:
