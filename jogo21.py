@@ -5,22 +5,25 @@ baralho = ["AS",2,3,4,5,6,7,8,9,10,"VALETE","DAMA","REI"]
 naipes = ["♣", "♦", "♥", "♠"]
 separacao = ('--')*20
 
+
 print(f"{separacao}\n        BEM-VINDO(A) AO JOGO 21!\n{separacao}")
 
-nome_jogador = input("\nDigite seu nome:")
+nome_jogador = str(input("\nDigite seu nome:").upper())
 
 opcao = input("\nDIGITE: \n[J] PARA JOGAR\n[S] PARA SAIR\n>> ")
 
-opcao2 = total = bar = nai = 0
+validacao = total = bar = nai = 0
 
 if opcao == "j" or opcao =="j":
     print("\nCOMEÇANDO...")
 elif opcao == "S" or opcao =="s":
     print(f'\nSAINDO...\n{nome_jogador} até a Proxíma!')
     sys.exit()
+else:
+    print("Digite somente as letras informadas.")
+    sys.exit()
 
-
-while opcao2 != "N":
+while validacao != "N":
     bar = random.choice(baralho)
     nai = random.choice(naipes)
 
@@ -46,4 +49,4 @@ while opcao2 != "N":
           print(f'\nParabéns! {nome_jogador} Você Ganhou!\nA soma das cartas escolhidas foi {total} e Não PASSOU de 21!')
           break
 
-    opcao2 = str(input("\nVocê quer mais uma carta [S] ou [N]? \n>> ").upper())
+    validacao = str(input("\nVocê quer mais uma carta [S] ou [N]? \n>> ").upper())
