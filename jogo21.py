@@ -1,33 +1,52 @@
 import random
 import sys
-
-baralho = ["AS",2,3,4,5,6,7,8,9,10,"VALETE","DAMA","REI"]
-naipes = ["♣", "♦", "♥", "♠"]
-separacao = ('--')*20
+import os
 
 
-print(f"{separacao}\n        BEM-VINDO(A) AO JOGO 21!\n{separacao}")
-print(f"{separacao}\nREGRAS: O JOGO TERMINA AO COMPLETAR 21, CHEGAR PROXIMO AO 21 E SE PASSAR DO 21\n{separacao}")
-
-nome_jogador = str(input("\nDigite seu nome:").upper())
-
-opcao = input("\nDIGITE: \n[J] PARA JOGAR\n[S] PARA SAIR\n>> ")
-
+bem_vindo = 'BEM-VINDO(A) AO JOGO 21!'
+separacao_b = ('-')*len(bem_vindo)
+regras = 'REGRAS: O JOGO TERMINA AO COMPLETAR 21, CHEGAR PROXIMO AO 21 E SE PASSAR DO 21'
+separacao_r = ('-')*len(regras)
 validacao = total = bar = nai = 0
 
-if opcao == "J" or opcao =="j":
-    print("\nCOMEÇANDO...")
-elif opcao == "S" or opcao =="s":
-    print(f'\nSAINDO...\n{nome_jogador} até a Proxíma!')
-    sys.exit()
-else:
-    print("Digite somente as letras informadas.")
-    sys.exit()
+def limpar_terminal(numlines=100):
+    if os.name == "posix":
+        os.system('clear')
+    elif os.name in ("nt", "dos", "ce"):
+        os.system('CLS')
+    else:
+        print('\n' * numlines)
 
-while validacao != "N":
+def para_ou_continua():
+    global validacao
+    validacao = str(input("\nVocê quer mais uma carta [S] ou [N]? \n>> ").lower())
+    if validacao != 's':
+        verifica_total()
+
+def verifica_total():
+    if total > 21:
+        print(f'\n{nome_jogador} Você PERDEU!\nAs soma das cartas escolhidas foi {total} e PASSOU de 21!')
+
+    elif 15 < total < 21:
+        print(f'\nParabéns! {nome_jogador} Você chegou próximo ao 21.\nA soma das cartas escolhidas foi {total} e Não PASSOU de 21!')
+
+    elif total == 21:
+        print(f'\nParabéns! {nome_jogador} Você Ganhou!\nA soma das cartas escolhidas foi {total} e Não PASSOU de 21!')
+
+    else:
+        print(f'Total das cartas {total}\n')
+    print('\nGostaria de jogar novamente?')
+    verifica_opcao()
+
+def sorteio():
+    limpar_terminal()
+
+    global total
+    baralho = ["AS",2,3,4,5,6,7,8,9,10,"VALETE","DAMA","REI"]
+    naipes = ["♣", "♦", "♥", "♠"]
+
     bar = random.choice(baralho)
     nai = random.choice(naipes)
-
 
     if bar == "AS" :
         total = total + 1
@@ -36,18 +55,34 @@ while validacao != "N":
     else:
         total = total + bar
 
-    print("\nA sua carta é:", bar, nai)
-    print("O valor de sua(s) carta(s):", total)
+    print(f"\nA sua carta é: {bar} {nai}")
+    print(f"O valor de sua(s) carta(s): {total}")
+    para_ou_continua()
+
+def verifica_opcao():
+    opcao = input("\nDIGITE: \n[J] PARA JOGAR\n[S] PARA SAIR\n>> ").lower()
+
+    if opcao == "j":
+        global total
+        print("\nCOMEÇANDO...")
+        total = 0
+
+    elif opcao =="s":
+        print(f'\nSAINDO...\naté a Proxíma {nome_jogador}!')
+        sys.exit()
+
+    else:
+        limpar_terminal()
+        print("Digite somente as letras informadas.")
+        verifica_opcao()
+
+print(f'{separacao_b}\n{bem_vindo}\n{separacao_b}')
+print(f'{separacao_r}\n{regras}\n{separacao_r}')
+nome_jogador = str(input("\nDigite seu nome:").upper())
+
+verifica_opcao()
 
 
-    if total > 21:
-          print(f'\n{nome_jogador} Você PERDEU!\nAs soma das cartas escolhidas foi {total} e PASSOU de 21!')
-          break
-    elif total >=16  and total < 21:
-          print(f'\nParabéns! {nome_jogador} Você chegou próximo ao 21.\nA soma das cartas escolhidas foi {total} e Não PASSOU de 21!')
-          break
-    elif total == 21:
-          print(f'\nParabéns! {nome_jogador} Você Ganhou!\nA soma das cartas escolhidas foi {total} e Não PASSOU de 21!')
-          break
+while True:
 
-    validacao = str(input("\nVocê quer mais uma carta [S] ou [N]? \n>> ").upper())
+    sorteio()
