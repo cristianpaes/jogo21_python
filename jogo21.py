@@ -5,7 +5,7 @@ import os
 
 bem_vindo = 'BEM-VINDO(A) AO JOGO 21!'
 separacao_b = ('-')*len(bem_vindo)
-regras = 'REGRAS: O JOGO TERMINA AO COMPLETAR 21, CHEGAR PROXIMO AO 21 E SE PASSAR DO 21'
+regras = 'REGRAS: O JOGO TERMINA AO COMPLETAR 21, CHEGAR PRóXIMO AO 21 E SE PASSAR DO 21'
 separacao_r = ('-')*len(regras)
 validacao = total = bar = nai = 0
 
@@ -78,7 +78,7 @@ def verifica_opcao():
 
 print(f'{separacao_b}\n{bem_vindo}\n{separacao_b}')
 print(f'{separacao_r}\n{regras}\n{separacao_r}')
-nome_jogador = str(input("\nDigite seu nome:").upper())
+nome_jogador = str(input("\nDigite o nome do Jogador: ").upper())
 
 verifica_opcao()
 
